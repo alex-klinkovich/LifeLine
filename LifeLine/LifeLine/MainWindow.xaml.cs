@@ -27,7 +27,7 @@ namespace LifeLine
         }
         
         
-        //Example for using server in client
+        /*Example for using server in client
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -36,6 +36,22 @@ namespace LifeLine
             int res = srv.Sub(num);
             labelRes.Content = res.ToString();
         }
-        
+        */
+        private void EmergencyButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ResponderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
