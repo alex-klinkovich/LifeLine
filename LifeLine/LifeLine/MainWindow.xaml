@@ -7,43 +7,38 @@
         WindowStartupLocation="CenterScreen"
         Background="#1E293B">
 
+    <!-- ================== RESOURCES ================== -->
     <Window.Resources>
-        <!-- Rounded Button Style -->
+
+        <!-- Rounded Button -->
         <Style x:Key="RoundedButton" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Padding" Value="16,10"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="22"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="22">
                             <ContentPresenter HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"/>
                         </Border>
 
                         <ControlTemplate.Triggers>
-                            <!-- Hover -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Opacity" Value="0.9"/>
                             </Trigger>
-
-                            <!-- Pressed -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Opacity" Value="0.8"/>
                                 <Setter TargetName="border" Property="RenderTransform">
                                     <Setter.Value>
-                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
-
-                            <!-- Disabled -->
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="border" Property="Opacity" Value="0.5"/>
                             </Trigger>
@@ -53,18 +48,20 @@
             </Setter>
         </Style>
 
-
-        <!-- Menu Style -->
+        <!-- Menu -->
         <Style TargetType="Menu">
             <Setter Property="Background" Value="#273449"/>
             <Setter Property="Foreground" Value="#E5E7EB"/>
         </Style>
+
         <Style TargetType="MenuItem">
             <Setter Property="Background" Value="#273449"/>
             <Setter Property="Foreground" Value="#E5E7EB"/>
         </Style>
+
     </Window.Resources>
 
+    <!-- ================== LAYOUT ================== -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -79,120 +76,160 @@
             <MenuItem Header="About" Click="AboutButton_Click"/>
         </Menu>
 
-        <!-- Main Frame -->
+        <!-- MAIN FRAME -->
         <Frame x:Name="MainFrame"
                Grid.Row="1"
                NavigationUIVisibility="Hidden"/>
 
-        <!-- Home Page Content -->
+        <!-- ================== HOME PAGE ================== -->
         <Grid x:Name="HomePage"
               Grid.Row="1"
               Background="#1E293B">
-            <Grid Margin="30">
+
+            <Grid Margin="32">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <!-- HEADER -->
+                <StackPanel Grid.Row="0" Margin="0,0,0,24">
                     <TextBlock Text="LifeLine"
                                FontSize="36"
                                FontWeight="Bold"
                                Foreground="#E5E7EB"/>
-                    <TextBlock Text="Emergency assistance system"
+                    <TextBlock Text="Emergency assistance and responder coordination system"
                                FontSize="14"
                                Foreground="#94A3B8"/>
                 </StackPanel>
 
+                <!-- CONTENT -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Emergency Tile -->
+                    <!-- ========== EMERGENCY TILE (FIXED) ========== -->
                     <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                            Margin="10"
+                            Margin="12"
                             Background="#273449"
                             CornerRadius="28"
                             BorderBrush="#334155"
                             BorderThickness="1.5"
-                            Padding="25">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Emergency Help"
-                                       FontSize="26"
-                                       FontWeight="Bold"
-                                       Foreground="#E5E7EB"/>
-                            <TextBlock Text="Immediate assistance with no login required"
-                                       FontSize="13"
-                                       Foreground="#94A3B8"
-                                       Margin="0,10,0,25"/>
+                            Padding="30">
 
-                            <Button Style="{StaticResource RoundedButton}"
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- ICON -->
+                            <TextBlock Grid.Row="0"
+                                       Text="🚨"
+                                       FontSize="64"
+                                       Margin="0,0,0,16"/>
+
+                            <!-- CONTENT (SCROLLABLE) -->
+                            <ScrollViewer Grid.Row="1"
+                                          VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+
+                                <StackPanel>
+                                    <TextBlock Text="Emergency Help"
+                                               FontSize="30"
+                                               FontWeight="Bold"
+                                               Foreground="#E5E7EB"/>
+
+                                    <TextBlock Text="Instant connection to nearby responders and doctors"
+                                               FontSize="16"
+                                               Foreground="#94A3B8"
+                                               Margin="0,12,0,20"/>
+
+                                    <StackPanel>
+                                        <TextBlock Text="• No registration required"
+                                                   Foreground="#CBD5E1"
+                                                   FontSize="14"/>
+                                        <TextBlock Text="• Automatic location sharing"
+                                                   Foreground="#CBD5E1"
+                                                   FontSize="14"/>
+                                        <TextBlock Text="• Secure communication"
+                                                   Foreground="#CBD5E1"
+                                                   FontSize="14"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                            <!-- CTA -->
+                            <Button Grid.Row="2"
+                                    Style="{StaticResource RoundedButton}"
                                     Content="GET HELP NOW"
-                                    Height="60"
-                                    FontSize="20"
                                     Background="#EF4444"
+                                    FontSize="24"
+                                    MinHeight="70"
+                                    Padding="26,14"
+                                    Margin="0,24,0,0"
+                                    HorizontalAlignment="Stretch"
                                     Click="EmergencyButton_Click"/>
-                        </StackPanel>
+                        </Grid>
                     </Border>
 
-                    <!-- Responder Tile -->
+                    <!-- RESPONDER TILE -->
                     <Border Grid.Row="0" Grid.Column="1"
-                            Margin="10"
+                            Margin="12"
                             Background="#273449"
                             CornerRadius="22"
                             BorderBrush="#334155"
                             BorderThickness="1.5"
-                            Padding="20">
+                            Padding="24">
                         <StackPanel>
                             <TextBlock Text="Responder Login"
                                        FontSize="20"
                                        FontWeight="Bold"
                                        Foreground="#E5E7EB"/>
-                            <TextBlock Text="Access dashboard and respond to calls"
+                            <TextBlock Text="Respond to emergencies in real time"
                                        FontSize="13"
                                        Foreground="#94A3B8"
-                                       Margin="0,8,0,15"/>
-
+                                       Margin="0,10,0,16"/>
                             <Button Style="{StaticResource RoundedButton}"
                                     Content="Login"
-                                    Height="45"
                                     Background="#3A7BD5"
+                                    MinHeight="48"
                                     Click="ResponderButton_Click"/>
                         </StackPanel>
                     </Border>
 
-                    <!-- About Tile -->
+                    <!-- ABOUT TILE -->
                     <Border Grid.Row="1" Grid.Column="1"
-                            Margin="10"
+                            Margin="12"
                             Background="#273449"
                             CornerRadius="22"
                             BorderBrush="#334155"
                             BorderThickness="1.5"
-                            Padding="20">
+                            Padding="24">
                         <StackPanel>
                             <TextBlock Text="About LifeLine"
                                        FontSize="20"
                                        FontWeight="Bold"
                                        Foreground="#E5E7EB"/>
-                            <TextBlock Text="Learn how it works and features"
+                            <TextBlock Text="System overview and features"
                                        FontSize="13"
                                        Foreground="#94A3B8"
-                                       Margin="0,8,0,15"/>
-
+                                       Margin="0,10,0,16"/>
                             <Button Style="{StaticResource RoundedButton}"
                                     Content="Open"
-                                    Height="45"
                                     Background="#27AE60"
+                                    MinHeight="48"
                                     Click="AboutButton_Click"/>
                         </StackPanel>
                     </Border>
+
                 </Grid>
             </Grid>
         </Grid>
