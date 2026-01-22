@@ -48,17 +48,6 @@
             </Setter>
         </Style>
 
-        <!-- Menu -->
-        <Style TargetType="Menu">
-            <Setter Property="Background" Value="#273449"/>
-            <Setter Property="Foreground" Value="#E5E7EB"/>
-        </Style>
-
-        <Style TargetType="MenuItem">
-            <Setter Property="Background" Value="#273449"/>
-            <Setter Property="Foreground" Value="#E5E7EB"/>
-        </Style>
-
     </Window.Resources>
 
     <!-- ================== LAYOUT ================== -->
@@ -67,19 +56,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- MENU BAR -->
-        <Menu Grid.Row="0">
-            <MenuItem Header="Home" Click="HomeButton_Click"/>
-            <MenuItem Header="Emergency" Click="EmergencyButton_Click"/>
-            <MenuItem Header="Responder" Click="ResponderButton_Click"/>
-            <MenuItem Header="About" Click="AboutButton_Click"/>
-        </Menu>
-
-        <!-- MAIN FRAME -->
-        <Frame x:Name="MainFrame"
-               Grid.Row="1"
-               NavigationUIVisibility="Hidden"/>
 
         <!-- ================== HOME PAGE ================== -->
         <Grid x:Name="HomePage"
@@ -114,7 +90,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- ========== EMERGENCY TILE (FIXED) ========== -->
+                    <!-- ========== EMERGENCY TILE (SCALABLE) ========== -->
                     <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                             Margin="12"
                             Background="#273449"
@@ -170,6 +146,7 @@
                             <Button Grid.Row="2"
                                     Style="{StaticResource RoundedButton}"
                                     Content="GET HELP NOW"
+                                    FontWeight="Bold"
                                     Background="#EF4444"
                                     FontSize="24"
                                     MinHeight="70"
@@ -199,6 +176,7 @@
                                        Margin="0,10,0,16"/>
                             <Button Style="{StaticResource RoundedButton}"
                                     Content="Login"
+                                    FontWeight="Medium"
                                     Background="#3A7BD5"
                                     MinHeight="48"
                                     Click="ResponderButton_Click"/>
@@ -224,6 +202,7 @@
                                        Margin="0,10,0,16"/>
                             <Button Style="{StaticResource RoundedButton}"
                                     Content="Open"
+                                    FontWeight="Medium"
                                     Background="#27AE60"
                                     MinHeight="48"
                                     Click="AboutButton_Click"/>
