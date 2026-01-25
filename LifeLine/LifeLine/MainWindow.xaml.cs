@@ -24,7 +24,10 @@ namespace LifeLine
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new HomePage());
         }
+        
+        
         
         
         /*Example for using server in client
@@ -37,21 +40,6 @@ namespace LifeLine
             labelRes.Content = res.ToString();
         }
         */
-        private void EmergencyButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void ResponderButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void AboutButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

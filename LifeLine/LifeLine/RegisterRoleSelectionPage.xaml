@@ -1,0 +1,199 @@
+﻿<Page x:Class="LifeLine.RegisterRoleSelectionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Background="#1E293B">
+
+    <!-- ================== RESOURCES ================== -->
+    <Page.Resources>
+
+        <!-- Role Card Button Style -->
+        <Style x:Key="RoleCard" TargetType="Button">
+            <Setter Property="Width" Value="260"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Background" Value="#273449"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="24"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#8B5CF6"/>
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.9"/>
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <!-- ================== ROOT ================== -->
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ================== HEADER ================== -->
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,32">
+            <TextBlock Text="Create Your Account"
+                       FontSize="34"
+                       FontWeight="Bold"
+                       Foreground="#E5E7EB"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Choose how you want to use LifeLine"
+                       FontSize="14"
+                       Foreground="#94A3B8"
+                       Margin="0,6,0,14"
+                       HorizontalAlignment="Center"/>
+
+            <Border Width="90"
+                    Height="4"
+                    Background="#8B5CF6"
+                    CornerRadius="2"/>
+        </StackPanel>
+
+        <!-- ================== ROLE SELECTION ================== -->
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- RESPONDER -->
+            <Button Grid.Column="0"
+                    Style="{StaticResource RoleCard}"
+                    Click="Responder_Click">
+                <StackPanel>
+                    <TextBlock Text=""
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="52"
+                               Foreground="#3A7BD5"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,18"/>
+
+                    <TextBlock Text="Responder"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#E5E7EB"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Emergency responder access"
+                               FontSize="14"
+                               Foreground="#94A3B8"
+                               TextAlignment="Center"
+                               Margin="16,10,16,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- DOCTOR -->
+            <Button Grid.Column="2"
+                    Style="{StaticResource RoleCard}"
+                    Click="Doctor_Click">
+                <StackPanel>
+                    <TextBlock Text="&#xE95E;"
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="52"
+                               Foreground="#22C55E"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,18"/>
+
+                    <TextBlock Text="Doctor"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#E5E7EB"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Medical professional access"
+                               FontSize="14"
+                               Foreground="#94A3B8"
+                               TextAlignment="Center"
+                               Margin="16,10,16,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- CIVILIAN -->
+            <Button Grid.Column="4"
+                    Style="{StaticResource RoleCard}"
+                    Click="Civilian_Click">
+                <StackPanel>
+                    <TextBlock Text=""
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="52"
+                               Foreground="#F59E0B"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,18"/>
+
+                    <TextBlock Text="Civilian"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#E5E7EB"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Request help and track responders"
+                               FontSize="14"
+                               Foreground="#94A3B8"
+                               TextAlignment="Center"
+                               Margin="16,10,16,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- ================== BACK ================== -->
+        <TextBlock Grid.Row="2"
+                   Text="← Back to Login"
+                   Foreground="#8B5CF6"
+                   FontWeight="Bold"
+                   Cursor="Hand"
+                   HorizontalAlignment="Center"
+                   Margin="0,24,0,0"
+                   MouseLeftButtonUp="Back_Click"/>
+    </Grid>
+</Page>
