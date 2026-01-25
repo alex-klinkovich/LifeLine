@@ -20,12 +20,28 @@ namespace LifeLine
     /// </summary>
     public partial class RegisterPage : Page
     {
-        private readonly string _role;
-        
+        private readonly int _roleId;
+        private static Dictionary<int, string> rolesDict = null; // singleton pattern design
 
         public RegisterPage(int roleId)
         {
             InitializeComponent();
+
+            if (rolesDict == null)
+            {
+                rolesDict = new Dictionary<int, string>();
+                FillRoleDictionary();
+            }// singleton pattern desing important to remember
+                
+
+            _roleId = roleId;
+            ApplyRoleUI();
+        }
+        private void FillRoleDictionary()
+        {
+            rolesDict.Add(1, "Respnder");
+            rolesDict.Add(2, "Doctor");
+            rolesDict.Add(3, "Civilian");
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
@@ -47,5 +63,36 @@ namespace LifeLine
         {
             NavigationService.GoBack();
         }
+
+
+        private void ApplyRoleUI()
+        {
+            switch(_roleId)
+            {
+                case 1:
+                    ResponderUI();
+                    break;
+                case 2:
+                    DoctorUI();
+                    break;
+                case 3:
+                    CivilianUI();
+                    break;
+
+            }
+        }
+        private void ResponderUI()
+        {
+
+        }
+        private void DoctorUI()
+        {
+
+        }
+        private void CivilianUI()
+        {
+
+        }
+
     }
 }
