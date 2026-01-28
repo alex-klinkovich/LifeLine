@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Background="#1E293B">
+      UseLayoutRounding="True"
+      TextOptions.TextFormattingMode="Display">
 
     <!-- ================== RESOURCES ================== -->
     <Page.Resources>
@@ -65,9 +66,18 @@
 
     </Page.Resources>
 
+
+    <!-- subtle gradient background -->
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E293B" Offset="0"/>
+            <GradientStop Color="#0F172A" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
     <!-- ================== ROOT ================== -->
     <Grid Margin="32">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -76,7 +86,7 @@
         <!-- ================== HEADER ================== -->
         <StackPanel Grid.Row="0"
                     HorizontalAlignment="Center"
-                    Margin="0,0,0,32">
+                    Margin="0,0,0,18">
             <TextBlock Text="Create Your Account"
                        FontSize="34"
                        FontWeight="Bold"
@@ -86,7 +96,7 @@
             <TextBlock Text="Choose how you want to use LifeLine"
                        FontSize="14"
                        Foreground="#94A3B8"
-                       Margin="0,6,0,14"
+                       Margin="0,6,0,12"
                        HorizontalAlignment="Center"/>
 
             <Border Width="90"
@@ -95,8 +105,29 @@
                     CornerRadius="2"/>
         </StackPanel>
 
+        <!-- ================== STEP INDICATOR ================== -->
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,28">
+
+            <!-- DOTS -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Ellipse Width="10" Height="10" Fill="#8B5CF6"/>
+                <Ellipse Width="10" Height="10" Fill="#8B5CF6" Margin="12,0,0,0"/>
+                <Ellipse Width="10" Height="10" Fill="#8B5CF6" Margin="12,0,0,0"/>
+                <Ellipse Width="10" Height="10" Fill="#475569" Margin="12,0,0,0"/>
+            </StackPanel>
+
+            <!-- LABEL -->
+            <TextBlock Text="Step 3 of 4 — Role Selection"
+                       FontSize="13"
+                       Foreground="#94A3B8"
+                       Margin="0,8,0,0"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
         <!-- ================== ROLE SELECTION ================== -->
-        <Grid Grid.Row="1"
+        <Grid Grid.Row="2"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
@@ -187,8 +218,8 @@
         </Grid>
 
         <!-- ================== BACK ================== -->
-        <TextBlock Grid.Row="2"
-                   Text="← Back to Login"
+        <TextBlock Grid.Row="3"
+                   Text="← Back to Step 2"
                    Foreground="#8B5CF6"
                    FontWeight="Bold"
                    Cursor="Hand"

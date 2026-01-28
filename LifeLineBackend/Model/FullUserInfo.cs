@@ -12,8 +12,8 @@ namespace Model
         private string address;
         private string phoneNumber;
         private string gender;
-        
-        private City city;
+
+        private string birthDate;
         private int cityId;
 
         public string Email { get =>  email; set => email = value; }
@@ -21,8 +21,7 @@ namespace Model
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public string Gender { get => gender; set => gender = value; }
         
-        public City City { get => city; set => city = value; }
-
+        public string BirthDate { get => birthDate; set => birthDate = value; }
         public int CityId { get => cityId; set => cityId = value; }
          
     }

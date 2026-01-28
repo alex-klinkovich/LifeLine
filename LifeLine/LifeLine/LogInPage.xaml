@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Background="#1E293B">
+      UseLayoutRounding="True"
+      TextOptions.TextFormattingMode="Display">
 
     <!-- ================== RESOURCES ================== -->
     <Page.Resources>
@@ -14,6 +15,9 @@
             <Setter Property="Padding" Value="16,10"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -40,10 +44,44 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--Tile -->
+        <Style x:Key="Tile" TargetType="Border">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="#273449"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+
+        <!-- Shadow wrapper -->
+        <Style x:Key="TileShadow" TargetType="Border">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" BlurRadius="18" Opacity="0.35" ShadowDepth="6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
+    <!-- subtle gradient background -->
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E293B" Offset="0"/>
+            <GradientStop Color="#0F172A" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
     <!-- ================== ROOT ================== -->
-    <Grid Margin="32">
+    <Grid Margin="32"
+          UseLayoutRounding="True"
+          SnapsToDevicePixels="True"
+          TextOptions.TextFormattingMode="Display">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -52,16 +90,19 @@
 
         <!-- ================== HEADER ================== -->
         <StackPanel Grid.Row="0" Margin="0,0,0,24" HorizontalAlignment="Center">
-            <TextBlock Text="Universal Login System"
+            <TextBlock x:Name="PageTitle" Text="Universal Login System"
                        FontSize="34"
                        FontWeight="Bold"
-                       Foreground="#E5E7EB"/>
+                       Foreground="#E5E7EB"
+                       TextOptions.TextFormattingMode="Display"/>
 
             <TextBlock Text="Secure access for everyone"
                        FontSize="14"
+                       x:Name="UnderPageTitle"
                        Foreground="#94A3B8"
                        Margin="0,4,0,12"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"
+                       TextOptions.TextFormattingMode="Display"/>
 
             <!-- Accent Line -->
             <Border Width="80"
@@ -71,128 +112,149 @@
                     Opacity="0.85"/>
         </StackPanel>
 
-        <!-- ================== FORM ================== -->
-        <Border Grid.Row="1"
-        Background="#273449"
-        CornerRadius="28"
-        BorderBrush="#334155"
-        BorderThickness="1.5"
-        Padding="30"
-        HorizontalAlignment="Center"
-        Width="450">
+        <!-- ================== FORM (WITH SHADOW WRAPPER) ================== -->
+        <Border Grid.Row="1" Style="{StaticResource TileShadow}"
+                HorizontalAlignment="Center"
+                Width="450">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <!-- Inner tile -->
+            <Border Style="{StaticResource Tile}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <!-- ================= INPUTS ================= -->
-                <StackPanel Grid.Row="0">
+                    <!-- ================= INPUTS ================= -->
+                    <StackPanel Grid.Row="0">
 
-                    <TextBlock Text="Username"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Foreground="#E5E7EB"/>
+                        <TextBlock Text="Username"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="#E5E7EB"
+                           TextOptions.TextFormattingMode="Display"/>
 
-                    <TextBox x:Name="UsernameBox"
-                     Height="40"
-                     VerticalAlignment="Center"
-                     Margin="0,6,0,16"
-                     Background="#1F2A3A"
-                     Foreground="White"
-                     BorderBrush="#334155"
-                     BorderThickness="1.5"
-                     Padding="10"
-                     FontSize="13"/>
-
-                    <TextBlock Text="Password"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Foreground="#E5E7EB"/>
-
-                    <PasswordBox x:Name="PasswordBox"
+                        <TextBox x:Name="UsernameBox"
                          Height="40"
-                         Margin="0,6,0,12"
+                         VerticalAlignment="Center"
+                         Margin="0,6,0,16"
                          Background="#1F2A3A"
                          Foreground="White"
                          BorderBrush="#334155"
                          BorderThickness="1.5"
                          Padding="10"
-                         FontSize="13"/>
+                         FontSize="13"
+                         SnapsToDevicePixels="True"
+                         UseLayoutRounding="True"/>
 
-                    <Grid Margin="0,8,0,20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <CheckBox x:Name="RememberMeCheck"
-                          Content="Remember me"
-                          Foreground="#CBD5E1"
-                          FontSize="14"
-                          FontWeight="SemiBold"/>
-
-                        <TextBlock Grid.Column="1"
-                           Text="Forgot Password?"
-                           Foreground="#3A7BD5"
+                        <TextBlock Text="Password"
+                           FontSize="14"
                            FontWeight="Bold"
-                           Cursor="Hand"
-                           TextDecorations="Underline"
-                           MouseLeftButtonUp="ForgotPassword_Click"/>
-                    </Grid>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            
-                        </Grid.RowDefinitions>
-                        
-                        <Button Content="Login" Grid.Row="1"
-                        Style="{StaticResource RoundedButton}"
-                        Background="#8B5CF6"
-                        FontWeight="Bold"
-                        FontSize="16"
-                        Height="50"
-                        Margin="0,8,0,0"
-                        Click="Login_Click"
-                        VerticalAlignment="Center"/>   
-                    </Grid>
-                    
+                           Foreground="#E5E7EB"
+                           TextOptions.TextFormattingMode="Display"/>
 
+                        <PasswordBox x:Name="PasswordBox"
+                             Height="40"
+                             Margin="0,6,0,12"
+                             Background="#1F2A3A"
+                             Foreground="White"
+                             BorderBrush="#334155"
+                             BorderThickness="1.5"
+                             Padding="10"
+                             FontSize="13"
+                             SnapsToDevicePixels="True"
+                             UseLayoutRounding="True"/>
 
-                </StackPanel>
+                        <Grid Margin="0,8,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                <!-- ================= SEPARATOR ================= -->
-                <Border Grid.Row="1"
-                Height="1"
-                Background="#334155"
-                Margin="0,5,0,15"
-                Opacity="0.6"/>
+                            <CheckBox x:Name="RememberMeCheck"
+                              Content="Remember me"
+                              Foreground="#CBD5E1"
+                              FontSize="14"
+                              FontWeight="SemiBold"/>
 
-                <!-- ================= REGISTER (ALWAYS VISIBLE) ================= -->
-                <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                            <TextBlock Grid.Column="1"
+                               Text="Forgot Password?"
+                               Foreground="#3A7BD5"
+                               FontWeight="Bold"
+                               Cursor="Hand"
+                               x:Name="ForgotPasswordLink"
+                               TextDecorations="Underline"
+                               MouseLeftButtonUp="ForgotPassword_Click"
+                               TextOptions.TextFormattingMode="Display"/>
+                        </Grid>
 
-                    <TextBlock Text="New here? "
-                       Foreground="#94A3B8"
-                       FontSize="14"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                    <TextBlock Text="Register"
-                       Foreground="#3A7BD5"
-                       FontWeight="Bold"
-                       Cursor="Hand"
-                       TextDecorations="Underline"
-                       FontSize="14"
-                       MouseLeftButtonUp="Register_Click"/>
-                </StackPanel>
+                            <Button Content="Login" Grid.Row="1"
+                            Style="{StaticResource RoundedButton}"
+                            Background="#8B5CF6"
+                            FontWeight="Bold"
+                            FontSize="16"
+                            Height="50"
+                            x:Name="LoginButton"
+                            Margin="0,8,0,0"
+                            Click="Login_Click"
+                            VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
 
-            </Grid>
+                    <!-- ================= SEPARATOR ================= -->
+                    <Border Grid.Row="1"
+                    Height="1"
+                    Background="#334155"
+                    Margin="0,5,0,15"
+                    Opacity="0.6"/>
+
+                    <!-- ================= REGISTER / CONTINUE ================= -->
+                    <StackPanel Grid.Row="2" x:Name="RegisterContinueStackPanel"
+        Orientation="Horizontal"
+        HorizontalAlignment="Center">
+
+                        <TextBlock Text="New here? "
+                   Foreground="#94A3B8"
+                   FontSize="14"
+                   TextOptions.TextFormattingMode="Display"/>
+
+                        <TextBlock Text="Register"
+                   Foreground="#3A7BD5"
+                   FontWeight="Bold"
+                   Cursor="Hand"
+                   TextDecorations="Underline"
+                   FontSize="14"
+                   MouseLeftButtonUp="Register_Click"
+                   TextOptions.TextFormattingMode="Display"/>
+
+                        <TextBlock Text="  |  "
+                   Foreground="#64748B"
+                   FontSize="14"
+                   x:Name="RegisterSeperator"
+                   Margin="6,0"
+                   TextOptions.TextFormattingMode="Display"/>
+
+                        <TextBlock Text="Continue registration"
+                   Foreground="#3A7BD5"
+                   FontWeight="Bold"
+                   Cursor="Hand"
+                   x:Name="ContinueRegistrationLink"
+                   TextDecorations="Underline"
+                   FontSize="14"
+                   MouseLeftButtonUp="ContinueRegistration_Click"
+                   TextOptions.TextFormattingMode="Display"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
         </Border>
-
 
         <!-- ================== BACK BUTTON ================== -->
         <Button Grid.Row="2"

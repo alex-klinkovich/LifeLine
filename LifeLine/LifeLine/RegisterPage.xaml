@@ -4,37 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Background="#1E293B">
+      UseLayoutRounding="True"
+      TextOptions.TextFormattingMode="Display">
 
+    <!-- ================== RESOURCES ================== -->
     <Page.Resources>
-        <Style x:Key="CardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#273449"/>
-            <Setter Property="CornerRadius" Value="26"/>
-            <Setter Property="BorderBrush" Value="#334155"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="Padding" Value="28"/>
-        </Style>
 
-        <Style x:Key="InputStyle" TargetType="TextBox">
-            <Setter Property="Height" Value="42"/>
-            <Setter Property="Background" Value="#1F2A3A"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#334155"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <Style x:Key="PasswordStyle" TargetType="PasswordBox">
-            <Setter Property="Height" Value="42"/>
-            <Setter Property="Background" Value="#1F2A3A"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#334155"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
+        <!-- Rounded Button -->
         <Style x:Key="RoundedButton" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
@@ -50,6 +26,7 @@
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Opacity" Value="0.9"/>
@@ -67,131 +44,368 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="InputBox" TargetType="TextBox">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#1F2A3A"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+
+        <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#1F2A3A"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+
+        <!-- Styled ComboBox -->
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="#1F2A3A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Margin" Value="0,6,0,16"/>
+        </Style>
+
+        <!-- TILE STYLE -->
+        <Style x:Key="Tile" TargetType="Border">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="#273449"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" BlurRadius="18" Opacity="0.35" ShadowDepth="6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Icon Toggle Button -->
+        <Style x:Key="IconToggleButton" TargetType="ToggleButton">
+            <Setter Property="Foreground" Value="#94A3B8"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="34"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
     </Page.Resources>
 
+    <!-- subtle gradient background -->
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E293B" Offset="0"/>
+            <GradientStop Color="#0F172A" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+    <!-- ================== ROOT ================== -->
     <Grid Margin="32">
+
+
+
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- HEADER -->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,18">
-            <TextBlock Text="Register"
+        <!-- ================== HEADER ================== -->
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,18">
+            <TextBlock Text="Create Your Account"
                        FontSize="34"
                        FontWeight="Bold"
                        Foreground="#E5E7EB"
                        HorizontalAlignment="Center"/>
 
-            <TextBlock Text="Create your account in 2 steps"
+            <TextBlock Text="Secure your account with LifeLine"
                        FontSize="14"
                        Foreground="#94A3B8"
-                       Margin="0,6,0,0"
+                       Margin="0,6,0,12"
                        HorizontalAlignment="Center"/>
 
-            <Border Width="120"
+            <Border Width="90"
                     Height="4"
                     Background="#8B5CF6"
                     CornerRadius="2"
-                    Margin="0,14,0,0"/>
+                    Opacity="0.9"/>
         </StackPanel>
 
-        <!-- FORM CARD -->
-        <Border Grid.Row="1" Style="{StaticResource CardStyle}" HorizontalAlignment="Center" Width="760">
-            <Grid>
+        <!-- ================== STEP INDICATOR ================== -->
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,28">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Ellipse Width="10" Height="10" Fill="#8B5CF6"/>
+                <Ellipse x:Name="SecondProgressPoint" Width="10" Height="10" Fill="#475569" Margin="12,0,0,0"/>
+                <Ellipse  Width="10" Height="10" Fill="#475569" Margin="12,0,0,0"/>
+                <Ellipse x:Name="FourthProgressPoint" Width="10" Height="10" Fill="#475569" Margin="12,0,0,0"/>
+            </StackPanel>
+
+            <TextBlock x:Name="StepLabel"
+                       Text="Step 1 of 4 — User Info"
+                       FontSize="13"
+                       Foreground="#94A3B8"
+                       Margin="0,8,0,0"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- ================== CONTENT (2 STEPS) ================== -->
+        <Grid Grid.Row="2">
+
+            <!-- USER INFO -->
+            <Grid x:Name="UserInfoGrid" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="32"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <!-- Tile 1: Username + Email -->
+                <Border Grid.Column="0" Style="{StaticResource Tile}">
+                    <StackPanel>
+                        <TextBlock Text="Account"
+                                   FontSize="22"
+                                   HorizontalAlignment="Center"
+                                   FontWeight="Bold"
+                                   Foreground="#E5E7EB"
+                                   Margin="0,0,0,10"/>
 
-                <!-- LEFT SECTION -->
-                <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                    <TextBlock Text="Personal Info"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#E5E7EB"/>
+                        <Border Width="150"
+                        Height="3"
+                        Background="#8B5CF6"
+                        CornerRadius="2"
+                        Opacity="0.6"
+                        Margin ="0,0,0,20"/>
 
-                    <TextBlock Text="Name, email, phone and address"
-                               FontSize="12"
-                               Foreground="#94A3B8"
-                               Margin="0,4,0,12"/>
+                        <!-- Username -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="18" Margin="35,0,10,0"/>
+                            <TextBlock Text="Username" FontSize="14" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <TextBox x:Name="UsernameBox" Style="{StaticResource InputBox}" Margin="35,0"/>
 
-                    <TextBlock Text="Full Name" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <TextBox Style="{StaticResource InputStyle}" Margin="0,8,0,14"/>
+                        <!-- Email -->
+                        <StackPanel Orientation="Horizontal" Margin="0,14,0,8">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="18" Margin="35,0,10,0"/>
+                            <TextBlock Text="Email" FontSize="14" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <TextBox x:Name="EmailBox" Style="{StaticResource InputBox}" Margin="35,0"/>
 
-                    <TextBlock Text="Email" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <TextBox Style="{StaticResource InputStyle}" Margin="0,8,0,14"/>
+                        <CheckBox x:Name="TermsCheck"
+                                  Margin="0,16,0,0"
+                                  Foreground="#CBD5E1"
+                                  FontWeight="SemiBold"
+                                  Content="I agree to the Terms and Conditions" 
+                                  HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
 
-                    <TextBlock Text="Phone Number" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <TextBox Style="{StaticResource InputStyle}" Margin="0,8,0,14"/>
+                <!-- Tile 2: Password + Confirm + Terms -->
+                <Border Grid.Column="2" Style="{StaticResource Tile}">
+                    <StackPanel>
+                        <TextBlock Text="Security"
+                                   FontSize="22"
+                                   HorizontalAlignment="Center"
+                                   FontWeight="Bold"
+                                   Foreground="#E5E7EB"
+                                   Margin="0,0,0,10"/>
 
-                    <TextBlock Text="Address" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <TextBox Style="{StaticResource InputStyle}" Margin="0,8,0,14"/>
-                </StackPanel>
+                        <Border Width="150"
+                        Height="3"
+                        Background="#8B5CF6"
+                        CornerRadius="2"
+                        Opacity="0.6"
+                        Margin ="0,0,0,20"/>
 
-                <!-- RIGHT SECTION -->
-                <StackPanel Grid.Column="1" Margin="20,0,0,0">
-                    <TextBlock Text="Security and Role"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#E5E7EB"/>
+                        <!-- Password -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="18" Margin="35,0,10,0"/>
+                            <TextBlock Text="Password" FontSize="14" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                        </StackPanel>
 
-                    <TextBlock Text="Set your password and role"
-                               FontSize="12"
-                               Foreground="#94A3B8"
-                               Margin="0,4,0,12"/>
+                        <!-- Password + Toggle -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="82"/>
+                            </Grid.ColumnDefinitions>
+                            <PasswordBox x:Name="PasswordBox" 
+                                         Style="{StaticResource PasswordBoxStyle}"
+                                         PasswordChanged="PasswordBox_PasswordChanged"
+                                         Margin="35,0,35,0" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="PasswordText"
+                                     Style="{StaticResource InputBox}"
+                                     Visibility="Collapsed"
+                                     TextChanged="PasswordText_TextChanged"
+                                     Margin="10,6,-1,6" Grid.ColumnSpan="2"/>
 
-                    <TextBlock Text="Password" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <PasswordBox Style="{StaticResource PasswordStyle}" Margin="0,8,0,14"/>
+                            <ToggleButton x:Name="TogglePassword" Margin="0,4,35,0"
+                                          Style="{StaticResource IconToggleButton}"
+                                          Content=""
+                                          Checked="TogglePassword_Checked"
+                                          Unchecked="TogglePassword_Unchecked"
+                                          ToolTip="Show password" Grid.Column="1" VerticalAlignment="Top"/>
+                        </Grid>
 
-                    <TextBlock Text="Confirm Password" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <PasswordBox Style="{StaticResource PasswordStyle}" Margin="0,8,0,14"/>
+                        <!-- Confirm Password -->
+                        <StackPanel Orientation="Horizontal" Margin="0,14,0,8">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="18" Margin="35,0,10,0"/>
+                            <TextBlock Text="Confirm Password" FontSize="14" Foreground="#94A3B8" FontWeight="SemiBold"/>
+                        </StackPanel>
 
-                    <TextBlock Text="Role" Foreground="#E5E7EB" FontWeight="Bold"/>
-                    <ComboBox Height="42"
-                              Background="#1F2A3A"
-                              Foreground="White"
-                              BorderBrush="#334155"
-                              BorderThickness="1.5"
-                              Margin="0,8,0,14">
-                        <ComboBoxItem Content="Responder"/>
-                        <ComboBoxItem Content="Doctor"/>
-                        <ComboBoxItem Content="Civilian"/>
-                    </ComboBox>
+                        <!-- Confirm + Toggle -->
+                        <Grid>
+                            <PasswordBox x:Name="ConfirmPasswordBox"
+                                         Style="{StaticResource PasswordBoxStyle}"
+                                         PasswordChanged="ConfirmPasswordBox_PasswordChanged"
+                                         Margin="35,0,35,0"/>
+                            <TextBox x:Name="ConfirmPasswordText"
+                                     Style="{StaticResource InputBox}"
+                                     Visibility="Collapsed"
+                                     TextChanged="ConfirmPasswordText_TextChanged"/>
 
-                    <Button Content="Create Account"
-                            Style="{StaticResource RoundedButton}"
-                            Background="#8B5CF6"
-                            FontWeight="Bold"
-                            Height="54"
-                            Margin="0,16,0,0"
-                            Click="Register_Click"/>
-                </StackPanel>
+                            <ToggleButton x:Name="ToggleConfirm" Margin="0,0,35,0"
+                                          Style="{StaticResource IconToggleButton}"
+                                          Content=""
+                                          Checked="ToggleConfirm_Checked"
+                                          Unchecked="ToggleConfirm_Unchecked"
+                                          ToolTip="Show password"/>
+                        </Grid>
+
+                        <!-- Terms Agreement -->
+
+                    </StackPanel>
+                </Border>
             </Grid>
-        </Border>
 
-        <!-- FOOTER -->
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <TextBlock Text="Already have an account?"
-                       Foreground="#94A3B8"
-                       FontSize="14"
-                       HorizontalAlignment="Center"/>
+            <!-- PERSONAL INFO -->
+            <Grid x:Name="PersonalInfoGrid" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="24"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Login"
-                       Foreground="#3A7BD5"
-                       FontWeight="Bold"
-                       Cursor="Hand"
-                       TextDecorations="Underline"
-                       Margin="0,6,0,0"
-                       HorizontalAlignment="Center"
-                       MouseLeftButtonUp="BackToLogin_Click"/>
-        </StackPanel>
+                <!-- LEFT TILE -->
+                <Border Grid.Column="0" Style="{StaticResource Tile}"
+>
+                    <StackPanel>
+                        <TextBlock Text="Personal Details"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#E5E7EB"/>
+
+                        <TextBlock Text="First Name"
+                                   Margin="0,16,0,0"
+                                   Foreground="#94A3B8"/>
+                        <TextBox Style="{StaticResource InputBox}" x:Name="FirstNameBox"/>
+
+                        <TextBlock Text="Last Name"
+                                   Foreground="#94A3B8"/>
+                        <TextBox Style="{StaticResource InputBox}" x:Name="LastNameBox"/>
+
+                        <TextBlock Text="Phone Number"
+                                   Foreground="#94A3B8"/>
+                        <TextBox Style="{StaticResource InputBox}" x:Name="PhoneBox"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- RIGHT TILE -->
+                <Border Grid.Column="2" Style="{StaticResource Tile}">
+
+                    <StackPanel>
+                        <TextBlock Text="Location"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#E5E7EB"/>
+
+                        <TextBlock Text="Address"
+                                   Margin="0,16,0,0"
+                                   Foreground="#94A3B8"/>
+                        <TextBox Style="{StaticResource InputBox}" x:Name="AddressBox"/>
+
+                        <TextBlock Text="Birthdate"
+                                   Foreground="#94A3B8"/>
+                        <DatePicker x:Name="BirthDatePicker"
+                                    Background="#1F2A3A"
+                                    Foreground="White"
+                                    BorderBrush="#334155"
+                                    BorderThickness="1.5"
+                                    Height="42"
+                                    Margin="0,6,0,16"/>
+
+                        <TextBlock Text="Gender"
+                                   Foreground="#94A3B8"/>
+                        <ComboBox Style="{StaticResource ComboBoxStyle}" x:Name="GenderCombo">
+                            <ComboBoxItem Content="Male"/>
+                            <ComboBoxItem Content="Female"/>
+                            <ComboBoxItem Content="Other"/>
+                        </ComboBox>
+
+                        <TextBlock Text="City"
+                                   Foreground="#94A3B8"/>
+                        <ComboBox Style="{StaticResource ComboBoxStyle}" x:Name="CityCombo">
+                            <ComboBoxItem Content="Tel Aviv"/>
+                            <ComboBoxItem Content="Jerusalem"/>
+                            <ComboBoxItem Content="Haifa"/>
+                            <ComboBoxItem Content="Beersheba"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- ================== BUTTONS ================== -->
+        <Grid Grid.Row="3" Margin="0,24,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="32" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Back Button (centered under first tile) -->
+            <Button Grid.Column="0"
+                    Style="{StaticResource RoundedButton}"
+                    Background="#334155"
+                    Width="200"
+                    Height="52"
+                    HorizontalAlignment="Center"
+                    Click="Back_Click">
+                Back
+            </Button>
+
+            <!-- Next Button (centered under second tile) -->
+            <Button Grid.Column="2"
+                    Style="{StaticResource RoundedButton}"
+                    Background="#8B5CF6"
+                    Width="200"
+                    Height="52"
+                    HorizontalAlignment="Center"
+                    Click="Next_Click">
+                Next
+            </Button>
+        </Grid>
     </Grid>
 </Page>

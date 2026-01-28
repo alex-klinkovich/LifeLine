@@ -49,6 +49,7 @@ namespace ViewDB
                     fullUser.CityId = int.Parse(reader["CityId"].ToString());
                     fullUser.Gender = reader["Gender"].ToString();
                     fullUser.PhoneNumber = reader["PhoneNumber"].ToString();
+                    fullUser.BirthDate = reader["BirthDate"].ToString();
                     
                 }
                 catch

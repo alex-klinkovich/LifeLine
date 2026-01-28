@@ -35,16 +35,16 @@ namespace LifeLine
         private void Responder_Click(object sender, RoutedEventArgs e)
         {
             // pass to register page with an indicator for the role
-            NavigationService.Navigate(new RegisterPage(roleIds[0]));
+            NavigationService.Navigate(new RegisterPage(roleIds[0], 4));
             
         }
         private void Doctor_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RegisterPage(roleIds[1]));
+            NavigationService.Navigate(new RegisterPage(roleIds[1], 4));
         }
         private void Civilian_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RegisterPage(roleIds[2]));
+            NavigationService.Navigate(new RegisterPage(roleIds[2], 4));
         }
 
     }

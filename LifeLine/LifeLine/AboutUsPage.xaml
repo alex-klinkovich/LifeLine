@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Background="#1E293B">
+      UseLayoutRounding="True"
+      TextOptions.TextFormattingMode="Display">
 
     <!-- ================== RESOURCES ================== -->
     <Page.Resources>
@@ -41,8 +42,38 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--Tile -->
+        <Style x:Key="Tile" TargetType="Border">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="#273449"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+        </Style>
+
+        <!-- Shadow wrapper -->
+        <Style x:Key="TileShadow" TargetType="Border">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#000000" BlurRadius="18" Opacity="0.35" ShadowDepth="6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
+    <!-- subtle gradient background -->
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E293B" Offset="0"/>
+            <GradientStop Color="#0F172A" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
     <!-- ================== ROOT ================== -->
     <Grid Margin="32">
         <Grid.RowDefinitions>
@@ -72,11 +103,7 @@
             <!-- LEFT PANEL -->
             <Border Grid.Column="0"
                     Margin="8"
-                    Background="#273449"
-                    CornerRadius="28"
-                    BorderBrush="#334155"
-                    BorderThickness="1.5"
-                    Padding="18">
+                    Style="{StaticResource Tile}">
                 <StackPanel>
 
                     <!-- What LifeLine Does -->
@@ -155,11 +182,7 @@
             <!-- RIGHT PANEL -->
             <Border Grid.Column="1"
                     Margin="8"
-                    Background="#273449"
-                    CornerRadius="28"
-                    BorderBrush="#334155"
-                    BorderThickness="1.5"
-                    Padding="18">
+                    Style="{StaticResource Tile}">
                 <StackPanel>
 
                     <!-- Mission -->

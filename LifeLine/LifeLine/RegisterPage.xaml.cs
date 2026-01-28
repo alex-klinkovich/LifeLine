@@ -23,19 +23,26 @@ namespace LifeLine
         private readonly int _roleId;
         private static Dictionary<int, string> rolesDict = null; // singleton pattern design
 
-        public RegisterPage(int roleId)
+        SolidColorBrush colorBrush = new SolidColorBrush();
+
+        private int _currentStep;  // get it from previous page
+        public RegisterPage(int roleId, int currentStep) // instead - int currentStep
         {
-            InitializeComponent();
+            InitializeComponent(); 
 
             if (rolesDict == null)
             {
                 rolesDict = new Dictionary<int, string>();
                 FillRoleDictionary();
             }// singleton pattern desing important to remember
-                
+            _currentStep = currentStep;    
 
-            _roleId = roleId;
-            ApplyRoleUI();
+            if(_currentStep == 4)
+            {
+                // show according grid.
+            }
+
+            
         }
         private void FillRoleDictionary()
         {
@@ -43,55 +50,184 @@ namespace LifeLine
             rolesDict.Add(2, "Doctor");
             rolesDict.Add(3, "Civilian");
         }
+        
+        private void ShowThirdStep()
+        {
+            UserInfoGrid.Visibility = Visibility.Collapsed;
+            PersonalInfoGrid.Visibility = Visibility.Visible;
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+            StepLabel.Text = "Step 3 of 3 — Personal Info";
+        }
+        private void ShowSecondStep()
         {
 
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void Next_Click(object sender, RoutedEventArgs e)
         {
+            /*
+             
+            if (currentStep == 2)
+            {
+                
+                // UserInfoGrid.Visibility = Visibility.Collapsed;
+                // PersonalInfoGrid.Visibility = Visibility.Visible;
+                
+                StepLabel.Text = "Step 3 of 3 — Personal Info";
+                currentStep = 3;
 
+                colorBrush.Color = Color.FromRgb(139, 92, 243); // purple dot
+                ThirdProgressPoint.Fill = colorBrush;
+            }
+            else
+            {
+                // TODO: submit form to backend
+                MessageBox.Show("Register completed!");
+            }
+            */
+            switch(_currentStep)
+            {
+                case 1:
+
+                    // save in db the data
+
+                    UserInfoGrid.Visibility = Visibility.Collapsed;
+                    PersonalInfoGrid.Visibility = Visibility.Visible;
+
+                    StepLabel.Text = "Step 2 of 4 — Personal Info";
+
+                    colorBrush.Color = Color.FromRgb(139, 92, 246); // purple - "filled"
+                    SecondProgressPoint.Fill = colorBrush;
+
+                    _currentStep = 2;
+
+                    break;
+
+                case 2:
+
+                    // save in db the data
+                    NavigationService.Navigate(new RegisterRoleSelectionPage());
+                    // it should navigate to the roleSelectionPage
+                    //      -> user presses back: return registerPage(2, roleId)
+                    //      -> user presses on one of the roles: return registerPage(4, roleId)
+
+                    break;
+
+                case 4:
+                    
+                    // save in db the data
+                    // register complete!
+                    // navigate to the login page
+                   
+                    break;
+                    
+            }
+            
+    
+                
+            
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
-        }
+            /*
+            if (_currentStep == 3)
+            {
+                UserInfoGrid.Visibility = Visibility.Visible;
+                PersonalInfoGrid.Visibility = Visibility.Collapsed;
 
-        private void BackToLogin_Click(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
+                StepLabel.Text = "Step 2 of 3 — User Info";
+                _currentStep = 2;
 
-
-        private void ApplyRoleUI()
-        {
-            switch(_roleId)
+                colorBrush.Color = Color.FromRgb(71, 85, 105); // dark blue - "not filled"
+                ThirdProgressPoint.Fill = colorBrush;
+            }
+            else
+            {
+                // go back to role selection
+                NavigationService.GoBack();
+            }
+            */
+            switch (_currentStep)
             {
                 case 1:
-                    ResponderUI();
-                    break;
-                case 2:
-                    DoctorUI();
-                    break;
-                case 3:
-                    CivilianUI();
+
+                    NavigationService.Navigate(new LogInPage());
+
                     break;
 
+                case 2:
+
+                    UserInfoGrid.Visibility = Visibility.Visible;
+                    PersonalInfoGrid.Visibility = Visibility.Collapsed;
+
+                    StepLabel.Text = "Step 1 of 4 — User Info";
+                    _currentStep = 1;
+
+                    colorBrush.Color = Color.FromRgb(71, 85, 105); // dark blue - "not filled"
+                    SecondProgressPoint.Fill = colorBrush;
+
+                    break;
+
+                case 4:
+
+                    NavigationService.Navigate(new RegisterRoleSelectionPage());
+
+                    break;
             }
         }
-        private void ResponderUI()
+        // visual functions
+        private void TogglePassword_Checked(object sender, RoutedEventArgs e)
         {
-
+            PasswordText.Text = PasswordBox.Password;
+            PasswordBox.Visibility = Visibility.Collapsed;
+            PasswordText.Visibility = Visibility.Visible;
         }
-        private void DoctorUI()
-        {
 
+        private void TogglePassword_Unchecked(object sender, RoutedEventArgs e)
+        {
+            PasswordBox.Password = PasswordText.Text;
+            PasswordText.Visibility = Visibility.Collapsed;
+            PasswordBox.Visibility = Visibility.Visible;
         }
-        private void CivilianUI()
-        {
 
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (TogglePassword.IsChecked == true)
+                PasswordText.Text = PasswordBox.Password;
+        }
+
+        private void PasswordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TogglePassword.IsChecked == true)
+                PasswordBox.Password = PasswordText.Text;
+        }
+
+        // ---- Same for confirm password ----
+        private void ToggleConfirm_Checked(object sender, RoutedEventArgs e)
+        {
+            ConfirmPasswordText.Text = ConfirmPasswordBox.Password;
+            ConfirmPasswordBox.Visibility = Visibility.Collapsed;
+            ConfirmPasswordText.Visibility = Visibility.Visible;
+        }
+
+        private void ToggleConfirm_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ConfirmPasswordBox.Password = ConfirmPasswordText.Text;
+            ConfirmPasswordText.Visibility = Visibility.Collapsed;
+            ConfirmPasswordBox.Visibility = Visibility.Visible;
+        }
+
+        private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (ToggleConfirm.IsChecked == true)
+                ConfirmPasswordText.Text = ConfirmPasswordBox.Password;
+        }
+
+        private void ConfirmPasswordText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ToggleConfirm.IsChecked == true)
+                ConfirmPasswordBox.Password = ConfirmPasswordText.Text;
         }
 
     }
